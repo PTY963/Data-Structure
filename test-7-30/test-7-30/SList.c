@@ -195,3 +195,19 @@ void SListEraseAfter(SLTNode* pos)
 	free(next);
 	next = NULL;
 }
+
+//Ïú»ÙÁ´±í
+void SListDestory(SLTNode** pphead)
+{
+	assert(pphead);
+
+	SLTNode* cur = *pphead;
+	while (cur)
+	{
+		SLTNode* next = cur->next;
+		free(cur);
+		cur = next;
+	}
+
+	*pphead = NULL;
+}

@@ -34,4 +34,7 @@ bool SListEmpty(SLTNode* phead);
 void SListInsert(SLTNode** pphead, SLTNode* pos, SLTDataType x);
 //在pos位置删除
 void SListErase(SLTNode** pphead, SLTNode* pos);
+//在pos之后的位置删除
 void SListEraseAfter(SLTNode* pos);
+//销毁链表
+void SListDestory(SLTNode* pphead);

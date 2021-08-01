@@ -85,6 +85,7 @@ void Test1()
 	SLTNode* plist = n1;
 	SListPrint(plist);
 
+	SListDestroy(&plist);
 }
 
 void Test2()
