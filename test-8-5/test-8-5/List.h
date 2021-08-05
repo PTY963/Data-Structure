@@ -26,3 +26,9 @@ void ListPopBack(LTNode* phead);
 bool ListEmpty(LTNode* phead);
 //计算链表中结点的个数
 size_t ListSize(LTNode* phead);
+//在pos之前的位置插入
+void ListInsert(LTNode* pos, LTDataType x);
+//头插
+void ListPushFront(LTNode* phead, LTDataType x);
+//查找pos位置的结点
+LTNode* ListFind(LTNode* phead, LTDataType x);

@@ -27,20 +27,20 @@ void ListInit(LTNode** pphead)
 }
 
 //尾插
-void ListPushBack(LTNode* phead, LTDataType x)
-{
-	assert(phead);
-	//找尾
-	LTNode* tail = phead->prev;
-	//生成新结点
-	LTNode* newnode = BuyListNode(x);
-	//改变链接关系
-	tail->next = newnode;
-	newnode->prev = tail;
-
-	phead->prev = newnode;
-	newnode->next = phead;
-}
+//void ListPushBack(LTNode* phead, LTDataType x)
+//{
+//	assert(phead);
+//	//找尾
+//	LTNode* tail = phead->prev;
+//	//生成新结点
+//	LTNode* newnode = BuyListNode(x);
+//	//改变链接关系
+//	tail->next = newnode;
+//	newnode->prev = tail;
+//
+//	phead->prev = newnode;
+//	newnode->next = phead;
+//}
 
 //打印
 void ListPrint(LTNode* phead)
@@ -93,4 +93,49 @@ size_t ListSize(LTNode* phead)
 		cur = cur->next;
 	}
 	return count;
+}
+
+//查找pos位置的结点
+LTNode* ListFind(LTNode* phead, LTDataType x)
+{
+	assert(phead);
+	LTNode* cur = phead->next;
+	while (cur != phead)
+	{
+		if (cur->data == x)
+			return cur;
+
+		cur = cur->next;
+	}
+	return NULL;
+}
+
+//在pos之前的位置插入
+void ListInsert( LTNode* pos, LTDataType x)
+{
+	assert(pos);
+
+	//生成一个新结点
+	LTNode* newnode = BuyListNode(x);
+	//找到pos前一个位置
+	LTNode* prev = pos->prev;
+	//改变链接关系prev newnode pos
+	prev->next = newnode;
+	newnode->prev = prev;
+
+	newnode->next = pos;
+	pos->prev = newnode;
+}
+
+//头插
+void ListPushFront(LTNode* phead, LTDataType x)
+{
+	assert(phead);
+	ListInsert(phead->next, x);
+}
+//尾插
+void ListPushBack(LTNode* phead, LTDataType x)
+{
+	assert(phead);
+	ListInsert(phead, x);
 }
