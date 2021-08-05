@@ -26,26 +26,26 @@
 //	ListPrint(plist);
 //}
 
-void TestList2()
-{
-	LTNode* plist = NULL;
-	ListInit(&plist);
-	ListPushBack(plist, 1);
-	ListPushBack(plist, 2);
-	ListPushBack(plist, 3);
-	ListPushBack(plist, 4);
-	ListPrint(plist);
-
-	ListPushFront(plist, 11);
-	ListPushFront(plist, 22);
-	ListPushFront(plist, 33);
-	ListPushFront(plist, 44);
-	ListPrint(plist);
-
-	LTNode* pos = ListFind(plist, 33);
-	ListInsert(pos, 333);
-	ListPrint(plist);
-}
+//void TestList2()
+//{
+//	LTNode* plist = NULL;
+//	ListInit(&plist);
+//	ListPushBack(plist, 1);
+//	ListPushBack(plist, 2);
+//	ListPushBack(plist, 3);
+//	ListPushBack(plist, 4);
+//	ListPrint(plist);
+//
+//	ListPushFront(plist, 11);
+//	ListPushFront(plist, 22);
+//	ListPushFront(plist, 33);
+//	ListPushFront(plist, 44);
+//	ListPrint(plist);
+//
+//	LTNode* pos = ListFind(plist, 33);
+//	ListInsert(pos, 333);
+//	ListPrint(plist);
+//}
 int main()
 {
 	//TestList1();

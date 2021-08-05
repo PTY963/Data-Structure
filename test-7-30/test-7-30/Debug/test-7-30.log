@@ -1,2 +1,5 @@
-﻿  SList.c
-  test-7-30.vcxproj -> D:\DataStructure\test-7-30\Debug\test-7-30.exe
+﻿  List.c
+  SList.c
+D:\DataStructure\test-7-30\test-7-30\SList.c(200,29): warning C4028: 形参 1 与声明不同
+  正在生成代码...
+LINK : fatal error LNK1104: 无法打开文件“D:\DataStructure\test-7-30\Debug\test-7-30.exe”
