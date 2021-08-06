@@ -32,3 +32,7 @@ void ListInsert(LTNode* pos, LTDataType x);
 void ListPushFront(LTNode* phead, LTDataType x);
 //查找pos位置的结点
 LTNode* ListFind(LTNode* phead, LTDataType x);
+//在pos位置删除
+void ListErase(LTNode* pos);
+//销毁链表
+void ListDestory(LTNode* phead);

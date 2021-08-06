@@ -139,3 +139,34 @@ void ListPushBack(LTNode* phead, LTDataType x)
 	assert(phead);
 	ListInsert(phead, x);
 }
+
+//在pos位置删除
+void ListErase(LTNode* pos)
+{
+	//判断pos是否为空
+	assert(pos);
+	//找到pos的前一个和后一个
+	LTNode* prev = pos->prev;
+	LTNode* next = pos->next;
+	//释放pos位置的结点
+	free(pos);
+	//改变链接关系
+	prev->next = next;
+	next->prev = prev;
+}
+//销毁链表
+//不传二级指针是为了保持接口的一致性，但是外面会产生野指针
+void ListDestory(LTNode* phead)
+{
+	assert(phead);
+	LTNode* cur = phead;
+	while (cur)
+	{
+		LTNode* next = cur->next;
+		free(cur);
+		cur = next;
+	}
+
+	free(phead);
+	phead = NULL;//就算在内部置成空也不会影响外面
+}
