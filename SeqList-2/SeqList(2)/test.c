@@ -19,8 +19,20 @@ void TestSeqList1()
 	SeqListPrint(&sl);
 	SeqListDestory(&sl);
 }
+void TestSeqList2()
+{
+	SeqList sl;
+	SeqListInit(&sl);
+	SeqListPushBack(&sl, 1);
+	SeqListPushBack(&sl, 2);
+	SeqListPushBack(&sl, 3);
+	SeqListPushBack(&sl, 4);
+	SeqListPrint(&sl);
+
+
+}
 int main()
 {
-	TestSeqList1();
+	//TestSeqList1();
 	return 0;
 }

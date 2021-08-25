@@ -22,3 +22,10 @@ void SeqListPopFront(SeqList* psl);
 
 void SeqListPrint(SeqList* psl);
 void SeqListCheckCapcity(SeqList* psl);
+
+//查找某个数据
+int SeqListFind(SeqList * psl, SLDataType x);
+//在任意位置插入
+void SeqListInsert(SeqList* psl, size_t pos, SLDataType x);
+//在任意位置删除
+void SeqListErase(SeqList* psl, size_t pos);
