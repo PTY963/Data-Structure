@@ -29,3 +29,6 @@ int SeqListFind(SeqList * psl, SLDataType x);
 void SeqListInsert(SeqList* psl, size_t pos, SLDataType x);
 //在任意位置删除
 void SeqListErase(SeqList* psl, size_t pos);
+
+size_t SeqListSize(SeqList* psl);
+void SeqListAt(SeqList* psl, size_t pos, SLDataType x);

@@ -144,3 +144,16 @@ void SeqListErase(SeqList* psl, size_t pos)
 	}
 	psl->size--;
 }
+
+size_t SeqListSize(SeqList* psl)
+{
+	assert(psl);
+	return psl->size;
+}
+void SeqListAt(SeqList* psl, size_t pos, SLDataType x)
+{
+	assert(psl);
+	assert(pos < psl->size);
+
+	psl->arr[pos] = x;
+}
