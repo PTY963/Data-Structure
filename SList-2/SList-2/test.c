@@ -23,8 +23,20 @@ void TestSList1()
 	SListPrint(n1);
 
 }
+void TestSList2()
+{
+	SLTNode* plist = NULL;
+	SListPushFront(&plist, -1);
+	SListPushBack(&plist, 1);
+	SListPushBack(&plist, 2);
+	SListPushBack(&plist, 3);
+	SListPushFront(&plist, 0);
+
+	SListPrint(plist);
+}
 int main()
 {
-	TestSList1();
+	//TestSList1();
+	TestSList2();
 	return 0;
 }
