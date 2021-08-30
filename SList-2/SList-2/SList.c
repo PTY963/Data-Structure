@@ -110,3 +110,85 @@ bool SListEmpty(SLTNode* phead)
 	return  phead == NULL;
 }
 
+SLTNode* SListFind(SLTNode* phead, SLTDataType x)
+{
+	SLTNode* cur = phead;
+	while (cur)
+	{
+		if (cur->data == x)
+			return cur;
+		else
+			cur = cur->next;
+	}
+
+	return NULL;
+}
+void SListInsert(SLTNode** pphead, SLTNode* pos, SLTDataType x)
+{
+	assert(pphead);
+	assert(pos);
+
+	if (pos == *pphead)
+	{
+		//头插
+		SListPushFront(pphead, x);
+	}
+	else
+	{
+		//在中间插入
+		//找到pos的前一个位置
+		SLTNode* prev = *pphead;
+		while (prev->next != pos)
+		{
+			prev = prev->next;
+		}
+		//申请一个新结点
+		SLTNode* newnode = BuySListNode(x);
+		//改变链接关系
+		prev->next = newnode;
+		newnode->next = pos;
+	}
+}
+void SListInsertAfter(SLTNode* pos, SLTDataType x)
+{
+	assert(pos);
+
+	SLTNode* newnode = BuySListNode(x);
+	newnode->next = pos->next;
+	pos->next = newnode;
+}
+
+void SListErase(SLTNode** pphead, SLTNode* pos)
+{
+	assert(pphead);
+
+	//1.pos在第一个节点的位置
+	//2.pos在中间位置
+	if (pos == *pphead)
+	{
+		SListPopFront(pphead);
+	}
+	else
+	{
+		//找到pos的前一个位置
+		SLTNode* prev = *pphead;
+		while (prev->next != pos)
+		{
+			prev = prev->next;
+		}
+		//改变链接关系
+		prev->next = pos->next;
+
+		free(pos);
+	}
+}
+void SListEraseAfter(SLTNode* pos)
+{
+	assert(pos);
+	assert(pos->next);//pos的下一个位置不能是NULL
+
+	SLTNode* next = pos->next->next;
+	free(pos->next);
+	pos->next = next;
+}
+

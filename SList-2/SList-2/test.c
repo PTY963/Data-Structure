@@ -34,9 +34,38 @@ void TestSList2()
 
 	SListPrint(plist);
 }
+void TestSList3()
+{
+	SLTNode* plist = NULL;
+	SListPushBack(&plist, 1);
+	SListPushBack(&plist, 2);
+	SListPushBack(&plist, 3);
+	SListPushBack(&plist, 4);
+	SListPrint(plist);
+
+	SLTNode* pos = SListFind(plist, 2);
+	if (pos)
+	{
+		printf("ур╣╫ак\n");
+	}
+	pos->data = 200;
+	SListPrint(plist);
+
+	SListInsert(&plist, plist, 234);
+	SListPrint(plist);
+
+	if (pos = SListFind(plist, 3))
+	{
+		SListInsert(&plist, pos, 987);
+	}
+	SListPrint(plist);
+
+
+
+}
 int main()
 {
 	//TestSList1();
-	TestSList2();
+	//TestSList2();
 	return 0;
 }
