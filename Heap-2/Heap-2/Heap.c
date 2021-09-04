@@ -13,13 +13,13 @@ void AdjustDown(HpDataType* a, int n, int parent)
 	while (child < n)
 	{
 		//选出最大的孩子
-		if (a[child] < a[child + 1] && child + 1 < n)
+		if (a[child] > a[child + 1] && child + 1 < n)
 		{
 			++child;
 		}
 
 		//判断孩子的父亲的大小，大则交换，小则停止
-		if (a[child] > a[parent])
+		if (a[child] < a[parent])
 		{
 			//交换
 			Swap(&a[child], &a[parent]);
@@ -86,7 +86,7 @@ void AdjustUp(HpDataType* a, int child)
 	//parent >= 0条件是错误的，因为parent不会小于0，程序正确是因为0不小于0
 	while (child > 0)
 	{
-		if (a[parent] < a[child])
+		if (a[parent] > a[child])
 		{
 			Swap(&a[parent], &a[child]);
 			child = parent;
@@ -122,3 +122,30 @@ void HeapPush(Heap* php, HpDataType x)
 	AdjustUp(php->a, php->size - 1);
 }
 
+//删除最值，找到次值
+void HeapPop(Heap* php)
+{
+	assert(php);
+	assert(!HeapEmpty(php));
+
+	Swap(&php->a[0], &php->a[php->size - 1]);
+	php->size--;
+
+	AdjustDown(php->a, php->size, 0);
+
+}
+
+bool HeapEmpty(Heap* php)
+{
+	assert(php);
+
+	return php->size == 0;
+}
+
+HpDataType HeapTop(Heap* php)
+{
+	assert(php);
+	assert(!HeapEmpty(php));
+
+	return php->a[0];
+}

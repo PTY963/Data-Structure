@@ -3,6 +3,8 @@
 #include<assert.h>
 #include<stdlib.h>
 #include<string.h>
+#include<stdbool.h>
+#include<time.h>
 
 typedef int HpDataType;
 typedef struct Heap
@@ -20,3 +22,6 @@ void HeapInit(Heap* php, HpDataType* arr, int n);
 void HeapDestory(Heap* php);
 void HeapPrint(Heap* php);
 void HeapPush(Heap* php, HpDataType x);
+void HeapPop(Heap* php);
+bool HeapEmpty(Heap* php);
+HpDataType HeapTop(Heap* php);

@@ -1,2 +1,3 @@
-﻿  Heap.c
-  Heap-2.vcxproj -> C:\Users\86199\source\repos\Heap-2\Debug\Heap-2.exe
+﻿  test.c
+D:\DataStructure\Heap-2\Heap-2\test.c(56,18): warning C4244: “函数”: 从“time_t”转换到“unsigned int”，可能丢失数据
+  Heap-2.vcxproj -> D:\DataStructure\Heap-2\Debug\Heap-2.exe
