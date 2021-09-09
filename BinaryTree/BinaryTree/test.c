@@ -108,6 +108,51 @@ int BinaryTreeLevelSize(BTNode* root, int k)
 	return BinaryTreeLevelSize(root->left, k - 1)
 		+ BinaryTreeLevelSize(root->right, k - 1);
 }
+
+//计算二叉树的深度/高度
+int BinaryTreeDepth(BTNode* root)
+{
+	if (root == NULL)
+		return 0;
+
+	int leftDepth = BinaryTreeDepth(root->left);
+	int rightDepth = BinaryTreeDepth(root->right);
+
+	return leftDepth > rightDepth ? leftDepth + 1 : rightDepth + 1;
+}
+
+//查找二叉树中值为x的结点
+BTNode* BinaryTreeFind(BTNode* root, BTDataType x)
+{
+	if (root == NULL)
+		return NULL;
+
+	if (root->a == x)
+		return root;
+
+	//说明该节点不为空，并且该节点不是要查找的结点
+	//先找左子树，找到了返回，找不到找右子树，还找不到，说明整棵树都没有，返回空
+	
+	//简化写法
+	/*BTNode* retleft = BinaryTreeFind(root->left, x);
+	if (retleft)
+		return retleft;
+
+	return BinaryTreeFind(root->right, x);*///右子树总要返回值
+
+	//标准的写法
+	BTNode* retleft = BinaryTreeFind(root->left, x);
+	if (retleft != NULL)
+		return retleft;
+	BTNode* retright = BinaryTreeFind(root->right, x);
+	if (retright != NULL)
+		return retright;
+
+	return NULL;
+
+	
+}
+
 int main()
 {
 	BTNode* root = CreatBinaryTree();
@@ -127,6 +172,13 @@ int main()
 
 	printf("BinaryTreeLevelSize: %d\n", BinaryTreeLevelSize(root, 4));
 	
+	printf("BinaryTreeDepth: %d\n", BinaryTreeDepth(root));
+
+	BTNode* ret = BinaryTreeFind(root, 'V');
+	if (ret == NULL)
+		printf("没找到\n");
+	else
+		printf("找到了\n");
 
 	return 0;
 }
