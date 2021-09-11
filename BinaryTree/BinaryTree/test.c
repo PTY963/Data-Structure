@@ -1,7 +1,7 @@
 #define _CRT_SECURE_NO_WARNINGS 1
 #include<stdio.h>
 #include<stdlib.h>
-
+#include"Queue.h"
 typedef char BTDataType;
 typedef struct BinaryTreeNode
 {
@@ -152,6 +152,26 @@ BTNode* BinaryTreeFind(BTNode* root, BTDataType x)
 
 	
 }
+//二叉树的销毁
+//传的是一级指针相当于传值
+//对形参的置空，不会影响实参
+void BinaryTreeDestroy(BTNode* root)
+{
+	if (root == NULL)
+		return;
+	//后序销毁
+	BinaryTreeDestroy(root->left);
+	BinaryTreeDestroy(root->right);
+	free(root);
+}
+
+//二叉树的层序遍历
+//void BinaryTreeLevelOrder(BTNode* root)
+//{
+//	
+//}
+
+//判断一颗二叉树是不是完全二叉树
 
 int main()
 {
@@ -179,6 +199,10 @@ int main()
 		printf("没找到\n");
 	else
 		printf("找到了\n");
+
+
+	BinaryTreeDestroy(root);
+	root = NULL;
 
 	return 0;
 }
