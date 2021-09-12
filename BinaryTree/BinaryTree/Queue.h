@@ -4,8 +4,8 @@
 #include<stdbool.h>
 #include<stdlib.h>
 
+typedef struct BinaryTreeNode* QDataType;
 //用单链表来实现队列
-typedef BTNode QDataType;
 typedef struct QueueNode
 {
 	struct QueueNode* next;

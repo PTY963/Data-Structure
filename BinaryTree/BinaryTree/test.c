@@ -1,7 +1,8 @@
 #define _CRT_SECURE_NO_WARNINGS 1
 #include<stdio.h>
 #include<stdlib.h>
-#include"Queue.h"
+
+
 typedef char BTDataType;
 typedef struct BinaryTreeNode
 {
@@ -11,6 +12,7 @@ typedef struct BinaryTreeNode
 
 }BTNode;
 
+#include"Queue.h"
 BTNode* BuyNode(BTDataType x)
 {
 	BTNode* node = (BTNode*)malloc(sizeof(BTNode));
@@ -166,12 +168,72 @@ void BinaryTreeDestroy(BTNode* root)
 }
 
 //二叉树的层序遍历
-//void BinaryTreeLevelOrder(BTNode* root)
-//{
-//	
-//}
+void BinaryTreeLevelOrder(BTNode* root)
+{
+	Queue q;
+	QueueInit(&q);
+	if (root)
+	{
+		QueuePush(&q, root);
+	}
+
+	while (!QueueEmpty(&q))
+	{
+		BTNode* front = QueueFront(&q);
+		QueuePop(&q);
+		printf("%c ", front->a);
+
+		if (front->left)
+		{
+			QueuePush(&q, front->left);
+		}
+		if (front->right)
+		{
+			QueuePush(&q, front->right);
+		}
+	}
+
+
+	QueueDestory(&q);
+}
 
 //判断一颗二叉树是不是完全二叉树
+bool BinaryTreeComplete(BTNode* root)
+{
+	Queue q;
+	QueueInit(&q);
+	if (root)
+	{
+		QueuePush(&q, root);
+	}
+
+	while (!QueueEmpty(&q))
+	{
+		BTNode* front = QueueFront(&q);
+		QueuePop(&q);
+		if (front == NULL)//对于完全二叉树来说NULL是连续的
+		{
+			break;
+		}
+		QueuePush(&q, front->left);//NULL也入队列
+		QueuePush(&q, front->right);
+
+	}
+
+	while (!QueueEmpty(&q))
+	{
+		BTNode* front = QueueFront(&q);
+		QueuePop(&q);
+		if (front != NULL)
+		{
+			QueueDestory(&q);
+            return false;
+		}
+			
+	}
+	QueueDestory(&q);
+	return true;
+}
 
 int main()
 {
@@ -200,6 +262,9 @@ int main()
 	else
 		printf("找到了\n");
 
+	BinaryTreeLevelOrder(root);
+	printf("\n");
+	printf("BinaryTreeComplete: %d\n", BinaryTreeComplete(root));
 
 	BinaryTreeDestroy(root);
 	root = NULL;
