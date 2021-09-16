@@ -14,10 +14,25 @@ void TestShellSort()
 	ShellSort(arr, size);
 	Print(arr, size);
 }
+void TestSelectSort()
+{
+	int arr[] = { 54,38,96,23,15,72,60,45,12 };
+	int size = sizeof(arr) / sizeof(arr[0]);
+	SelectSort(arr, size);
+	Print(arr, size);
+}
+void TestHeapSort()
+{
+	int arr[] = { 54,38,96,23,15,72,60,45,12 };
+	int size = sizeof(arr) / sizeof(arr[0]);
+	HeapSort(arr, size);
+	Print(arr, size);
+}
 int main()
 {
 	//TestInsert();
-	TestShellSort();
+	//TestShellSort();
+	//TestSelectSort();
+	TestHeapSort();
 	return 0;
 }
-
