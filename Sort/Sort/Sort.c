@@ -1,5 +1,11 @@
 #define _CRT_SECURE_NO_WARNINGS 1
 #include"Sort.h"
+void Swap(int* px, int* py)
+{
+	int tmp = *px;
+	*px = *py;
+	*py = tmp;
+}
 void Print(int* a, int n)
 {
 	for (int i = 0; i < n; ++i)
@@ -119,5 +125,41 @@ void HeapSort(int* a, int n)
 		Swap(&a[0], &a[end]);
 		AdjustDown(a, end, 0);
 		--end;
+	}
+}
+
+//冒泡排序
+//void BubbleSort(int* a, int n)
+//{
+//	for (int j = 0; j < n; ++j)
+//	{
+//		for (int i = 1; i < n - j; ++i)      //i=1,用前一个和后一个比
+//		{
+//			if (a[i - 1] > a[i])             
+//			{
+//				Swap(&a[i - 1], &a[i]);
+//			}
+//		}
+//	}
+//}
+
+void BubbleSort(int* a, int n)
+{
+	for (int end = n; end > 1; --end)      //end控制排序的趟数
+	{
+		int exchange = 0;                  //标志位，检查两个数是否交换
+		for (int i = 1; i < end; ++i)
+		{
+			if (a[i - 1] > a[i])
+			{
+				Swap(&a[i - 1], &a[i]);
+				exchange = 1;
+			}
+		}
+
+		if (exchange == 0)                //exchange未改变，数组本身有序，无需交换
+		{
+			break;
+		}
 	}
 }

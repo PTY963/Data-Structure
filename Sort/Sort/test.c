@@ -28,11 +28,19 @@ void TestHeapSort()
 	HeapSort(arr, size);
 	Print(arr, size);
 }
+void TestBubbleSort()
+{
+	int arr[] = { 54,38,96,23,15,72,60,45,12 };
+	int size = sizeof(arr) / sizeof(arr[0]);
+	BubbleSort(arr, size);
+	Print(arr, size);
+}
 int main()
 {
 	//TestInsert();
 	//TestShellSort();
 	//TestSelectSort();
-	TestHeapSort();
+	//TestHeapSort();
+	TestBubbleSort();
 	return 0;
 }
