@@ -163,3 +163,74 @@ void BubbleSort(int* a, int n)
 		}
 	}
 }
+
+//int PartSort(int* a, int left, int right)
+//{
+//	int key = left;
+//	while (left < right)
+//	{
+//		//right先出发，找到比key小的位置
+//		while (left < right && a[right] >= a[key])
+//		{
+//			--right;
+//		}
+//
+//		//right找到之后停止，left接着出发，找到比key大的值
+//		while (left < right && a[left] <= a[key])
+//		{
+//			++left;
+//		}
+//
+//		Swap(&a[left], &a[right]);
+//	}
+//	Swap(&a[key], &a[left]);
+//
+//	return left;
+//}
+////时间复杂度是O(N*logN)
+////最坏：O(N^2)  ---  优化
+////1、随机选key 不靠谱
+////2、三数取中
+//void QuickSort(int* a, int left, int right)
+//{
+//	if (left < right)
+//	{
+//		int keyi = PartSort(a, left, right);
+//		QuickSort(a, left, keyi - 1);
+//		QuickSort(a, keyi + 1, right);
+//	}
+//}
+
+
+int PartSort(int* a, int left, int right)
+{
+	int keyi = left;
+	while (left < right)
+	{
+		while (left < right  && a[right] >= a[keyi])
+		{
+			--right;
+		}
+
+		while (left < right && a[left] <= a[keyi])
+		{
+			++left;
+		}
+
+		//right走到了小的位置，left走到了大的位置
+		Swap(&a[left], &a[right]);
+	}
+	//right和left相遇了
+	Swap(&a[left], &a[keyi]);
+
+	return left;
+}
+void QuickSort(int* a, int left, int right)
+{
+	if (left < right)
+	{
+		int keyi = PartSort(a, left, right);
+		QuickSort(a, left, keyi - 1);
+		QuickSort(a, keyi + 1, right);
+	}
+}

@@ -35,12 +35,21 @@ void TestBubbleSort()
 	BubbleSort(arr, size);
 	Print(arr, size);
 }
+void TestQuickSort()
+{
+	int arr[] = { 6, 1, 2, 7, 9, 3, 4, 5, 10, 8 };
+	int size = sizeof(arr) / sizeof(arr[0]);
+	QuickSort(arr, 0, size - 1);
+	Print(arr, size);
+	perror("Quick");
+}
 int main()
 {
 	//TestInsert();
 	//TestShellSort();
 	//TestSelectSort();
 	//TestHeapSort();
-	TestBubbleSort();
+	//TestBubbleSort();
+	TestQuickSort();
 	return 0;
 }

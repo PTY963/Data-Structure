@@ -15,6 +15,8 @@ void HeapSort(int* a, int n);
 //Ωªªª≈≈–Ú
 //1°¢√∞≈›≈≈–Ú
 void BubbleSort(int* a, int n);
+//2°¢øÏÀŸ≈≈–Ú
+void QuickSort(int* a, int left, int right);
 
 void Swap(int* px, int* py);
 void Print(int* a, int n);
