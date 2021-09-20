@@ -202,35 +202,174 @@ void BubbleSort(int* a, int n)
 //}
 
 
-int PartSort(int* a, int left, int right)
+//int PartSort(int* a, int left, int right)
+//{
+//	int keyi = left;
+//	while (left < right)
+//	{
+//		while (left < right  && a[right] >= a[keyi])
+//		{
+//			--right;
+//		}
+//
+//		while (left < right && a[left] <= a[keyi])
+//		{
+//			++left;
+//		}
+//
+//		//right走到了小的位置，left走到了大的位置
+//		Swap(&a[left], &a[right]);
+//	}
+//	//right和left相遇了
+//	Swap(&a[left], &a[keyi]);
+//
+//	return left;
+//}
+//void QuickSort(int* a, int left, int right)
+//{
+//	if (left < right)
+//	{
+//		int keyi = PartSort(a, left, right);
+//		QuickSort(a, left, keyi - 1);
+//		QuickSort(a, keyi + 1, right);
+//	}
+//}
+
+//在理想条件下时间复杂度O(N*logN)
+//在有序条件下：O(N^2)
+//1、随机选key
+
+//2、三数取中 left mid right 选出不是最大也不是最小的
+//针对有序情况，如果取头，取的就是最小值
+//如果取尾，取的就是最大值
+int GetMidIndex(int* a, int left, int right)
 {
-	int keyi = left;
+	int mid = left + (right - left) / 2;//?
+	if (a[left] < a[mid])
+	{
+		if (a[mid] < a[right])
+			return mid;
+		else if (a[left] < a[right])
+			return right;
+		else
+			return left;
+	}
+	else//a[left] > a[mid]
+	{
+		if (a[mid] > a[right])
+			return mid;
+		else if (a[left] < a[right])
+			return left;
+		else
+			return right;
+	}
+
+	
+}
+int PartSort1(int* a, int left, int right)
+{
+	int midi = GetMidIndex(a, left, right);
+	Swap(&a[left], &a[midi]);
+	int key = left;
 	while (left < right)
 	{
-		while (left < right  && a[right] >= a[keyi])
+		while (left < right && a[right] >= a[key])
 		{
 			--right;
 		}
 
-		while (left < right && a[left] <= a[keyi])
+		while (left < right && a[left] <= a[key])
 		{
 			++left;
 		}
 
-		//right走到了小的位置，left走到了大的位置
 		Swap(&a[left], &a[right]);
 	}
-	//right和left相遇了
-	Swap(&a[left], &a[keyi]);
+	Swap(&a[key], &a[left]);
 
 	return left;
 }
+
+//2、挖坑法
+int PartSort2(int* a, int left, int right)
+{
+	//三数取中 -- 取出left mid right中不大也不小的数
+	int midi = GetMidIndex(a, left, right);
+	Swap(&a[left], &a[midi]);
+
+	int key = a[left];
+	int hole = left;
+	while (left < right)
+	{
+		//right先去找小的
+		while (left < right && a[right] >= key)
+		{
+			--right;
+		}
+
+		a[hole] = a[right];
+		hole = right;//right就成了坑
+
+		//left去找大的
+		while (left < right && a[left] <= key)
+		{
+			++left;
+		}
+
+		a[hole] = a[left];
+		hole = left;
+	}
+
+	a[hole] = key;
+	return hole;
+}
+
+//3、前后指针版本
+int PartSort3(int* a, int left, int right)
+{
+	int midi = GetMidIndex(a, left, right);
+	Swap(&a[left], &a[midi]);
+
+	int key = left;
+	int prev = left;
+	int cur = prev + 1;
+
+	while (cur <= right)
+	{
+		if (a[cur] < a[key] && ++prev != cur)//prev已经++了
+		{
+			Swap(&a[prev], &a[cur]);
+		}
+
+		++cur;
+
+		/*while (a[cur] >= a[key] && cur <= right)
+		{
+			++cur;
+		}
+
+		if (cur <= right)
+		{
+			++prev;
+			Swap(&a[prev], &a[cur]);
+		}
+		
+		++cur;*/
+	}
+	//交换prev和key的值
+	Swap(&a[prev], &a[key]);
+
+	return prev;
+}
 void QuickSort(int* a, int left, int right)
 {
-	if (left < right)
+	if (left >= right)
 	{
-		int keyi = PartSort(a, left, right);
-		QuickSort(a, left, keyi - 1);
-		QuickSort(a, keyi + 1, right);
+		return;
 	}
+
+	int keyi = PartSort3(a, left, right);
+	QuickSort(a, left, keyi - 1);
+	QuickSort(a, keyi + 1, right);
+	
 }
