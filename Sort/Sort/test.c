@@ -43,6 +43,16 @@ void TestQuickSort()
 	Print(arr, size);
 	perror("Quick");
 }
+void TestMergeSort()
+{
+	int arr[] = { 6, 1, 2, 7, 9, 3, 4, 5, 10, 8 };
+	//6 1 2 7 9 3 4 5 10 8
+	//6 1
+
+	int size = sizeof(arr) / sizeof(arr[0]);
+	MergeSort(arr, size);
+	Print(arr, size);
+}
 int main()
 {
 	//TestInsert();
@@ -50,6 +60,7 @@ int main()
 	//TestSelectSort();
 	//TestHeapSort();
 	//TestBubbleSort();
-	TestQuickSort();
+	//TestQuickSort();
+	TestMergeSort();
 	return 0;
 }

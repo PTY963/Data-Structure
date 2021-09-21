@@ -18,5 +18,8 @@ void BubbleSort(int* a, int n);
 //2¡¢¿ìËÙÅÅĞò
 void QuickSort(int* a, int left, int right);
 
+//¹é²¢ÅÅĞò
+void MergeSort(int* a, int n);
+
 void Swap(int* px, int* py);
 void Print(int* a, int n);

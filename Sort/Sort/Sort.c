@@ -1,5 +1,6 @@
 #define _CRT_SECURE_NO_WARNINGS 1
 #include"Sort.h"
+#include"Stack.h"
 void Swap(int* px, int* py)
 {
 	int tmp = *px;
@@ -372,4 +373,98 @@ void QuickSort(int* a, int left, int right)
 	QuickSort(a, left, keyi - 1);
 	QuickSort(a, keyi + 1, right);
 	
+}
+//非递归版本
+void QuickSortNonR(int* a, int left, int right)
+{
+	Stack st;
+	StackInit(&st);
+	StackPush(&st, right);
+	StackPush(&st, left);
+
+	while (!StackEmpty(&st))//循环结束的条件是栈已经没有数据了
+	{
+		int begin = StackTop(&st);
+		StackPop(&st);
+
+		int end = StackTop(&st);
+		StackPop(&st);
+
+		int keyi = PartSort3(a, begin, end);
+
+		if (keyi + 1 < end)
+		{
+			StackPush(&st, end);
+			StackPush(&st, keyi + 1);
+		}
+
+		if (begin < keyi - 1)
+		{
+			StackPush(&st, keyi - 1);
+			StackPush(&st, begin);
+		}
+	}
+	
+	StackDestory(&st);
+	
+}
+
+//归并排序
+void _MergeSort(int* a, int left, int right, int* tmp)
+{
+	//1、分解，让子区间有序
+	if (left >= right)//递归返回的条件
+	{
+		return;
+	}
+	int mid = (left + right) / 2;
+	//[left mid] [mid + 1 right]
+	
+	_MergeSort(a, left, mid, tmp);
+	_MergeSort(a, mid + 1, right, tmp);
+
+	//2、归并
+	int begin1 = left, end1 = mid;
+	int begin2 = mid + 1, end2= right;
+	int tmpi = left;
+
+	//循环结束的条件是：两个数组中有一个走到尾
+	while (begin1 <= end1 && begin2 <= end2)
+	{
+		if (a[begin1] < a[begin2])
+		{
+			tmp[tmpi] = a[begin1];
+			++begin1;
+		}
+		else//a[begin1] > a[begin2]
+		{
+			tmp[tmpi] = a[begin2];
+			++begin2;
+		}
+
+		++tmpi;
+	}
+	//程序走到这儿，说明有一个已经走到了尾
+	while (begin1 <= end1)
+	{
+		tmp[tmpi++] = a[begin1++];
+		
+	}
+	while (begin2 <= end2)
+	{
+		tmp[tmpi++] = a[begin2++];
+		
+	}
+
+	//3、将临时数组的内容拷贝到原数组
+	for (int i = left; i <= right; ++i)
+	{
+		a[i] = tmp[i];
+	}
+}
+void MergeSort(int* a, int n)
+{
+	int* tmp = (int*)malloc(sizeof(int) * n);
+	_MergeSort(a, 0, n - 1, tmp);
+	free(tmp);//无需置空，tmp变量出了作用域就会销毁
 }
