@@ -462,9 +462,49 @@ void _MergeSort(int* a, int left, int right, int* tmp)
 		a[i] = tmp[i];
 	}
 }
+//时间复杂度O(N*logN)
 void MergeSort(int* a, int n)
 {
 	int* tmp = (int*)malloc(sizeof(int) * n);
 	_MergeSort(a, 0, n - 1, tmp);
 	free(tmp);//无需置空，tmp变量出了作用域就会销毁
+}
+
+//非比较排序
+//计数排序
+void CountSort(int* a, int n)
+{
+	//遍历原数组，在原数组中找出最大值和最小值
+	int max = a[0], min = a[0];
+	for (int i = 0; i < n; ++i)
+	{
+		if (a[i] < min)
+		{
+			min = a[i];
+		}
+
+		if (a[i] > max)
+		{
+			max = a[i];
+		}
+	}
+
+	//开辟出【min max】大小的数组，并初始化成0
+	int range = max - min + 1;
+	int* count = (int*)calloc(range, sizeof(int));
+
+	//计算出原数组中，每个值出现的次数,将出现次数放在对应的count数组中
+	for (int i = 0; i < n; ++i)
+	{
+		count[a[i] - min]++;
+	}
+
+	//根据count数组中的值来排序
+	for (int i = 0; i < range; ++i)
+	{
+		while (count[i]--)
+		{
+			a[i++] = i + min;
+		}
+	}
 }

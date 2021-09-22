@@ -21,5 +21,8 @@ void QuickSort(int* a, int left, int right);
 //归并排序
 void MergeSort(int* a, int n);
 
+//非比较排序
+//计数排序
+void CountSort(int* a, int n);
 void Swap(int* px, int* py);
 void Print(int* a, int n);
