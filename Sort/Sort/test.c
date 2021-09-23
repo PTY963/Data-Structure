@@ -45,12 +45,12 @@ void TestQuickSort()
 }
 void TestMergeSort()
 {
-	int arr[] = { 6, 1, 2, 7, 9, 3, 4, 5, 10, 8 };
+	int arr[] = { 6, 1, 2, 7, 9, 3, 4, 5};
 	//6 1 2 7 9 3 4 5 10 8
 	//6 1
 
 	int size = sizeof(arr) / sizeof(arr[0]);
-	MergeSort(arr, size);
+	MergeSortNonR(arr, size);
 	Print(arr, size);
 }
 int main()

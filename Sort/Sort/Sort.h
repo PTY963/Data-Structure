@@ -1,5 +1,6 @@
 #pragma once
 #include<stdio.h>
+#include<stdlib.h>
 //插入排序
 //1、直接插入排序
 //时间复杂度 O(N^2) 最坏 - 逆序
@@ -20,6 +21,7 @@ void QuickSort(int* a, int left, int right);
 
 //归并排序
 void MergeSort(int* a, int n);
+void MergeSortNonR(int* a, int n);
 
 //非比较排序
 //计数排序

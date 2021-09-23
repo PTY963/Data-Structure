@@ -469,6 +469,67 @@ void MergeSort(int* a, int n)
 	_MergeSort(a, 0, n - 1, tmp);
 	free(tmp);//无需置空，tmp变量出了作用域就会销毁
 }
+//归并排序的非递归实现
+void MergeSortNonR(int* a, int n)
+{
+	int* tmp = (int*)malloc(sizeof(int) * n);
+	if (tmp == NULL)
+	{
+		perror("malloc");
+		exit(-1);
+	}
+
+	int groupNum = 1;
+	while (groupNum < n)
+	{
+		for (int i = 0; i < n; i += groupNum * 2)
+		{
+			int begin1 = i, end1 = i + groupNum - 1;
+			int begin2 = i + groupNum, end2 = i + 2 * groupNum - 1;
+			int index = begin1;
+
+			if (begin2 >= n)//无需归并，但需要拷贝到tmp数组
+			{
+				begin2 = n;
+				end2 = n + 1;
+			}
+
+			if (end1 >= n)
+			{
+				end1 = n - 1;
+			}
+
+			if (end2 >= n)
+			{
+				end2 = n - 1;
+			}
+			//循环终止的条件是其中一个组走到结束
+			while (begin1 <= end1 && begin2 <= end2)
+			{
+				if (a[begin1] < a[begin2])
+					tmp[index++] = a[begin1++];
+				else
+					tmp[index++] = a[begin2++];
+			}
+
+			//将剩下的组的数据拷贝到tmp中
+			while (begin1 <= end1)
+				tmp[index++] = a[begin1++];
+			while (begin2 <= end2)
+				tmp[index++] = a[begin2++];
+
+		}
+		//将tmp数组中的数据拷贝回到原数组
+		for (int i = 0; i < n; ++i)
+		{
+			a[i] = tmp[i];
+		}
+		Print(a, n);
+		groupNum *= 2;
+		
+	}
+	
+}
 
 //非比较排序
 //计数排序
