@@ -15,10 +15,18 @@ void TestSelectSort()
 	SelectSort(arr, size);
 	Print(arr, size);
 }
+void TestHeapSort()
+{
+	int arr[] = { 189, 45, 42, 18, 15, 38, 2, 73, 69, 128 };
+	int size = sizeof(arr) / sizeof(arr[0]);
+	HeapSort(arr, size);
+	Print(arr, size);
+}
 int main()
 {
 	//TestShellSort();
-	TestSelectSort();
+	//TestSelectSort();
+	TestHeapSort();
 	
 	return 0;
 }
